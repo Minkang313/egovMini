@@ -44,6 +44,13 @@
 			</list>
 		</property>
 	</bean>
+	<bean id="globalsConfig" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/egovframework/props/globals.properties</value>
+			</list>
+		</property>
+	</bean>
 	
 	<bean id="antPathMater" class="org.springframework.util.AntPathMatcher" />
 	<bean id="defaultTraceHandler" class="egovframework.rte.fdl.cmmn.trace.handler.DefaultTraceHandler" />
