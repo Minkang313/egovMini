@@ -38,4 +38,15 @@ public class Test1Controller {
         return result;
     }
 
+    /**
+     * 게시글 등록
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "/addBoard.do")
+    @ResponseBody
+    public int addBoard(@RequestParam Map<String, Object> param){
+
+        return test1Service.addBoard(param);
+    }
 }

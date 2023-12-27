@@ -35,4 +35,12 @@
         WHERE
             id = #{id}
     </select>
+
+    <insert id="addBoard">
+        -- "addBoard" : 게시글 등록
+        INSERT INTO board.board1
+            (title, "content", view_cnt, rdate, user_id, use_yn)
+        VALUES
+            (#{title}, #{content}, 0, NOW(), #{user_id}, 'Y')
+    </insert>
 </mapper>
