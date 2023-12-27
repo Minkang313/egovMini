@@ -11,4 +11,6 @@ public interface Test1Service {
     int addBoard(Map<String, Object> param);
 
     int updateboard(Map<String, Object> param);
+
+    int deleteBoard(Map<String, Object> param);
 }

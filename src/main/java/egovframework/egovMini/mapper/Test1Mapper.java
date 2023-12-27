@@ -15,4 +15,6 @@ public interface Test1Mapper {
     int addBoard(Map<String, Object> param);
 
     int updateboard(Map<String, Object> param);
+
+    int deleteBoard(Map<String, Object> param);
 }

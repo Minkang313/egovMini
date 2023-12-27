@@ -51,4 +51,14 @@ public class Test1ServiceImpl implements Test1Service {
     public int updateboard(Map<String, Object> param) {
         return test1Mapper.updateboard(param);
     }
+
+    /**
+     * 게시글 삭제
+     * @param param
+     * @return
+     */
+    @Override
+    public int deleteBoard(Map<String, Object> param) {
+        return test1Mapper.deleteBoard(param);
+    }
 }

@@ -61,4 +61,16 @@ public class Test1Controller {
 
         return test1Service.updateboard(param);
     }
+
+    /**
+     * 게시글 삭제
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "/deleteBoard.do")
+    @ResponseBody
+    public int deleteBoard(@RequestParam Map<String, Object> param){
+
+        return test1Service.deleteBoard(param);
+    }
 }

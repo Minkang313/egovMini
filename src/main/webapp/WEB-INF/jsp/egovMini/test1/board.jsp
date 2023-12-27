@@ -33,7 +33,7 @@
         }
         .listBtn{
             position: relative;
-            left: 200px;
+            left: 150px;
         }
         .saveBtn {
             position: relative;
@@ -52,7 +52,7 @@
         }
         .loadUpdateBtn {
             position: relative;
-            left: 300px
+            left: 250px
         }
         .cancelBtn {
             position: relative;
@@ -65,6 +65,9 @@
         }
         .contentTd, textarea {
             white-space: pre-line;
+        }
+        .deleteBtn {
+            position: relative;
         }
     </style>
 </head>
@@ -100,6 +103,7 @@
 
             </table>
             <div style="height: 10px"></div>
+            <button class="deleteBtn" onclick="deleteBoard()">삭제</button>
             <button onclick="location.href='/test1/board.do'" class="listBtn">목록</button>
             <button onclick="loadUpdateboard()" class="loadUpdateBtn">수정</button>
         </div>
@@ -308,6 +312,27 @@
                 }
             }
         })
+    }
+
+    const deleteBoard = () => {
+
+        let boardId = $('#detailId').text()
+
+        if (confirm('정말 삭제하시겠습니까?')) {
+            $.ajax({
+                url: "/test1/deleteBoard.do",
+                method: "Post",
+                data: {'id': boardId},
+                success: (res) => {
+                    if (res == 1) {
+                        alert('삭제되었습니다.');
+                        location.href='/test1/board.do'
+                    } else {
+                        alert('삭제에 실패했습니다.');
+                    }
+                }
+            })
+        }
     }
 </script>
 </body>

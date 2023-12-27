@@ -54,4 +54,14 @@
         WHERE
             id = #{id}::Integer
     </update>
+
+    <update id="deleteBoard">
+        -- "deleteBoard" : 게시글 삭제
+        UPDATE
+            board.board1
+        SET
+            use_yn = 'N'
+        WHERE
+            id = #{id}::Integer
+    </update>
 </mapper>
