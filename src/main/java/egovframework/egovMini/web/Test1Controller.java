@@ -49,4 +49,16 @@ public class Test1Controller {
 
         return test1Service.addBoard(param);
     }
+
+    /**
+     * 게시글 수정
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "/updateboard.do")
+    @ResponseBody
+    public int updateBoard(@RequestParam Map<String, Object> param){
+
+        return test1Service.updateboard(param);
+    }
 }

@@ -13,4 +13,6 @@ public interface Test1Mapper {
     public Map<String, Object> getBoard1Detail(int id);
 
     int addBoard(Map<String, Object> param);
+
+    int updateboard(Map<String, Object> param);
 }

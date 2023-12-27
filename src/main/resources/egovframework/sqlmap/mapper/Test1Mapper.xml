@@ -43,4 +43,15 @@
         VALUES
             (#{title}, #{content}, 0, NOW(), #{user_id}, 'Y')
     </insert>
+
+    <update id="updateboard">
+        -- "updateboard" : 게시글 수정
+        UPDATE
+            board.board1
+        SET
+            title = #{title},
+            content = #{content}
+        WHERE
+            id = #{id}::Integer
+    </update>
 </mapper>
