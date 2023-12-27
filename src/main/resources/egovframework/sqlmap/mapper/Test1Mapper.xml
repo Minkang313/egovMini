@@ -35,4 +35,33 @@
         WHERE
             id = #{id}
     </select>
+
+    <insert id="addBoard">
+        -- "addBoard" : 게시글 등록
+        INSERT INTO board.board1
+            (title, "content", view_cnt, rdate, user_id, use_yn)
+        VALUES
+            (#{title}, #{content}, 0, NOW(), #{user_id}, 'Y')
+    </insert>
+
+    <update id="updateboard">
+        -- "updateboard" : 게시글 수정
+        UPDATE
+            board.board1
+        SET
+            title = #{title},
+            content = #{content}
+        WHERE
+            id = #{id}::Integer
+    </update>
+
+    <update id="deleteBoard">
+        -- "deleteBoard" : 게시글 삭제
+        UPDATE
+            board.board1
+        SET
+            use_yn = 'N'
+        WHERE
+            id = #{id}::Integer
+    </update>
 </mapper>

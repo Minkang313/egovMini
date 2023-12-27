@@ -38,4 +38,39 @@ public class Test1Controller {
         return result;
     }
 
+    /**
+     * 게시글 등록
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "/addBoard.do")
+    @ResponseBody
+    public int addBoard(@RequestParam Map<String, Object> param){
+
+        return test1Service.addBoard(param);
+    }
+
+    /**
+     * 게시글 수정
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "/updateboard.do")
+    @ResponseBody
+    public int updateBoard(@RequestParam Map<String, Object> param){
+
+        return test1Service.updateboard(param);
+    }
+
+    /**
+     * 게시글 삭제
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "/deleteBoard.do")
+    @ResponseBody
+    public int deleteBoard(@RequestParam Map<String, Object> param){
+
+        return test1Service.deleteBoard(param);
+    }
 }
