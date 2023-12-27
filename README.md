@@ -1,10 +1,12 @@
 전자정부프레임워크 3.9.0
+<br/>
 Open JDK 1.8.0
+<br/>
 postgrsql
 
 
 -------------------
-게시판 제목, 내용에 게시판 id를 추가해 insert
+게시판 제목, 내용에 게시판 id를 추가해 insert <br/>
 INSERT INTO board1 
 (title, "content", view_cnt, rdate, user_id, use_yn)
 VALUES 

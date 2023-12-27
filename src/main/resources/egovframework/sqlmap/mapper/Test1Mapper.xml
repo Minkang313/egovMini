@@ -14,5 +14,25 @@
             use_yn
         FROM
             board.board1
+        WHERE
+            use_yn = 'Y'
+        ORDER BY id DESC
+        limit 10 offset 0;
+    </select>
+
+    <select id="getBoard1Detail" resultType="hashMap">
+        -- "getBoard1Detail" : 게시판 1 상세조회
+        SELECT
+            id,
+            title,
+            "content",
+            view_cnt,
+            to_char(rdate, 'YYYY-MM-DD') as rdate,
+            user_id,
+            use_yn
+        FROM
+            board.board1
+        WHERE
+            id = #{id}
     </select>
 </mapper>
