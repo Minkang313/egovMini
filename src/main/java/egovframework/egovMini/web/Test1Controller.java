@@ -3,7 +3,10 @@ package egovframework.egovMini.web;
 import egovframework.egovMini.service.Test1Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
 
@@ -14,12 +17,60 @@ public class Test1Controller {
     @Autowired Test1Service test1Service;
 
     @RequestMapping(value = "/board.do")
-    public String board1(){
+    public String board1(Model model){
 
         Map<String, Object> board1Map = test1Service.getBoard1List();
-        System.out.println("board1Map" + board1Map);
+        model.addAttribute("board1Map", board1Map);
 
         return "test1/board";
     }
 
+    /**
+     * 게시판 상세조회
+     * @return
+     */
+    @RequestMapping(value = "/boardDetail.do")
+    @ResponseBody
+    public Map<String, Object> boardDetail(@RequestParam(value = "id") int id){
+
+        Map<String, Object> result = test1Service.getBoard1Detail(id);
+
+        return result;
+    }
+
+    /**
+     * 게시글 등록
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "/addBoard.do")
+    @ResponseBody
+    public int addBoard(@RequestParam Map<String, Object> param){
+
+        return test1Service.addBoard(param);
+    }
+
+    /**
+     * 게시글 수정
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "/updateboard.do")
+    @ResponseBody
+    public int updateBoard(@RequestParam Map<String, Object> param){
+
+        return test1Service.updateboard(param);
+    }
+
+    /**
+     * 게시글 삭제
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "/deleteBoard.do")
+    @ResponseBody
+    public int deleteBoard(@RequestParam Map<String, Object> param){
+
+        return test1Service.deleteBoard(param);
+    }
 }
