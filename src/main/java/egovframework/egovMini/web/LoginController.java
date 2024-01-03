@@ -55,4 +55,15 @@ public class LoginController {
         return result;
     }
 
+    /**
+     * 로그아웃
+     * @param request
+     */
+    @RequestMapping(value = "/logout.do")
+    @ResponseBody
+    public void logout(HttpServletRequest request){
+        
+        request.getSession().removeAttribute("loginId");
+    }
+
 }

@@ -11,6 +11,10 @@
 
 <div style="height: 30px"></div>
 
+<button onclick="logout()">로그아웃</button>
+
+<div style="height: 30px"></div>
+
 <button onclick="checkSession()">세션 확인</button>
 
 <script>
@@ -57,6 +61,18 @@
         }
     }
 
+    /**
+     * 로그아웃
+     */
+    const logout = async () => {
+        let url = '/logout.do'
+        try {
+            let response = await fetch(url);
+            let data = await response.json();
+        } catch (error) {
+            console.log(error)
+        }
+    }
 </script>
 </body>
 </html>
