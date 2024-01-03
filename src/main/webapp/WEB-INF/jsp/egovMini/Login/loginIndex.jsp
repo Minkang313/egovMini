@@ -9,7 +9,14 @@
 <div style="height: 5px"></div>
 <button onclick="clickSessionLogin()">세션 로그인</button>
 
+<div style="height: 30px"></div>
+
+<button onclick="checkSession()">세션 확인</button>
+
 <script>
+    /**
+     * 일반 세션 로그인 시도
+     */
     const clickSessionLogin = () => {
         let username = document.getElementById('username').value
         let password = document.getElementById('password').value
@@ -28,9 +35,28 @@
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                let resultCode = data.resultCode;
+                let msg = data.msg;
+
+                alert(msg);
             })
+            .catch(error => console.log(error));
     }
+
+    /**
+     * 세션 확인
+     */
+    async function checkSession() {
+        let url = '/checkSession.do';
+        try {
+            let response = await fetch(url);
+            let data = await response.json();
+            alert("로그인 아이디: " + data.loginId);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 </script>
 </body>
 </html>
