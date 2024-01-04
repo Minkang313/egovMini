@@ -5,5 +5,5 @@ import java.util.Map;
 
 public interface LoginService {
 
-    Map<String, Object> attempLogin(Map<String, Object> param, HttpServletRequest request);
+    Map<String, Object> attempSessionLogin(Map<String, Object> param, HttpServletRequest request);
 }

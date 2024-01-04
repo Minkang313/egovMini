@@ -8,4 +8,6 @@ import java.util.Map;
 public interface LoginMapper {
 
     int attempLogin(Map<String, Object> param);
+
+    Map<String, Object> getUserInfo(String username);
 }
