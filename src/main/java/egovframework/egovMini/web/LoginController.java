@@ -33,7 +33,7 @@ public class LoginController {
     @ResponseBody
     public Map<String, Object> sessionLogin(@RequestBody Map<String, Object> param, HttpServletRequest request){
 
-        Map<String, Object> result = loginService.attempLogin(param, request);
+        Map<String, Object> result = loginService.attempSessionLogin(param, request);
 
         return result;
     }
