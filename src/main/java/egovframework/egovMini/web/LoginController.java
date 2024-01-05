@@ -59,11 +59,22 @@ public class LoginController {
      * 로그아웃
      * @param request
      */
-    @RequestMapping(value = "/logout.do")
+    @RequestMapping(value = "/sessionLogout.do")
     @ResponseBody
-    public void logout(HttpServletRequest request){
+    public void sessionLogout(HttpServletRequest request){
         
         request.getSession().removeAttribute("loginId");
     }
 
+    /**
+     * 쿠키 로그인
+     * @param param
+     * @return
+     */
+    @RequestMapping(value = "/cookieLogin.do")
+    @ResponseBody
+    public Map<String, Object> cookieLogin(@RequestBody Map<String, Object> param){
+
+        return loginService.attemptBcryptLogin(param);
+    }
 }
