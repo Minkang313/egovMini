@@ -2,6 +2,7 @@ package egovframework.egovMini.service.serviceImpl;
 
 import egovframework.egovMini.mapper.LoginMapper;
 import egovframework.egovMini.service.LoginService;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -47,6 +48,31 @@ public class LoginServiceImpl implements LoginService {
         } catch (RuntimeException e) {
             result.put("resultCode", "E");
             result.put("msg", "로그인 에러");
+        }
+
+        return result;
+    }
+
+    /**
+     * BCrypt 로그인
+     * @param param
+     * @return
+     */
+    @Override
+    public Map<String, Object> attemptBcryptLogin(Map<String, Object> param) {
+
+        Map<String, Object> result = new HashMap<>();
+
+        Map<String, Object> userInfo = loginMapper.getUserInfo((String) param.get("username"));
+        String loginPw = (String) param.get("password");
+        String bcrypt = (String) userInfo.get("bcrypt");
+        if (veriBCryptPwd(loginPw, bcrypt)) {
+            result.put("resultCode", "S");
+            result.put("msg", "로그인에 성공하였습니다.");
+            result.put("loginId", param.get("username"));
+        } else {
+            result.put("resultCode", "F");
+            result.put("msg", "로그인에 실패하였습니다.");
         }
 
         return result;
@@ -112,12 +138,25 @@ public class LoginServiceImpl implements LoginService {
      */
     private boolean veriSHA256Pwd(String loginPw, String salt, String pwd){
         String loginEncryptPwd = getSHA256Encrypt(loginPw, salt);
-        System.out.println("loginEncryptPwd: " + loginEncryptPwd);
-        System.out.println("pwd: " + pwd);
-        if (loginEncryptPwd.equals(pwd)) {
-            return true;
-        } else {
-            return false;
-        }
+        return loginEncryptPwd.equals(pwd);
+    }
+
+    /**
+     * BCrypt 비밀번호 해싱
+     * @param password
+     * @return
+     */
+     public String getBCryptPwd(String password){
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
+    /**
+     * BCrypt 라이브러리의 비밀번호 일치 여부 확인
+     * @param loginPw
+     * @param pwd
+     * @return
+     */
+    public boolean veriBCryptPwd(String loginPw, String pwd){
+        return BCrypt.checkpw(loginPw, pwd);
     }
 }
