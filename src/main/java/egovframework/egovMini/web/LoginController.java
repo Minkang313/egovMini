@@ -77,4 +77,21 @@ public class LoginController {
 
         return loginService.attemptBcryptLogin(param);
     }
+
+    @RequestMapping(value = "/oauth/kakao.do")
+    public String kakaoLogin(@RequestParam(value = "code") String code){
+
+        // URL에 포함된 code를 이용하여 액세스 토큰 발급
+        String accessToken = loginService.getKakaoAccessToken(code);
+        System.out.println(accessToken);
+
+        // 액세스 토큰을 이용하여 카카오 서버에서 유저 정보(닉네임, 이메일) 받아오기
+        HashMap<String, Object> userInfo = loginService.getUserInfo(accessToken);
+        System.out.println("login Controller : " + userInfo);
+
+        return null;
+    }
+
 }
+
+

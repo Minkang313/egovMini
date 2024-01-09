@@ -9,6 +9,7 @@
 <div style="height: 5px"></div>
 <button onclick="clickSessionLogin()">세션 로그인</button>
 <button onclick="clickCookieLogin()">쿠키 로그인</button>
+<button onclick="kakaoLogin()">카카오 로그인</button>
 
 <div style="height: 30px"></div>
 
@@ -124,6 +125,12 @@
                 alert('로그인 쿠키가 존재하지 않습니다.');
             }
         }
+    }
+
+    const kakaoLogin = () => {
+        let REST_API_KEY = 'ea03b7cd1fb602deba0647ceb4669bc2'
+        let REDIRECT_URI = 'http://localhost:8080/oauth/kakao.do'
+        window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=\${REST_API_KEY}&redirect_uri=\${REDIRECT_URI}&response_type=code`
     }
 </script>
 </body>
