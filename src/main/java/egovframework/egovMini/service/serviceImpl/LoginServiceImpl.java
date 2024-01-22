@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -84,6 +85,11 @@ public class LoginServiceImpl implements LoginService {
         return result;
     }
 
+    /**
+     * Access Token 얻기
+     * @param code
+     * @return
+     */
     @Override
     public String getKakaoAccessToken (String code) {
         String accessToken = "";
@@ -102,8 +108,8 @@ public class LoginServiceImpl implements LoginService {
             // POST 요청에서 필요한 파라미터를 OutputStream을 통해 전송
             BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             String sb = "grant_type=authorization_code" +
-                    "&client_id=REST_API_KEY 입력" + // REST_API_KEY
-                    "&redirect_uri=http://localhost:8080/app/login/kakao" + // REDIRECT_URI
+                    "&client_id=ea03b7cd1fb602deba0647ceb4669bc2" + // REST_API_KEY
+                    "&redirect_uri=http://localhost:8080/oauth/kakao.do" + // REDIRECT_URI
                     "&code=" + code;
             bufferedWriter.write(sb);
             bufferedWriter.flush();
@@ -138,9 +144,15 @@ public class LoginServiceImpl implements LoginService {
         return accessToken;
     }
 
+    /**
+     * 카카오 로그인 정보 얻기
+     * @param accessToken
+     * @return
+     */
     public HashMap<String, Object> getUserInfo(String accessToken) {
         HashMap<String, Object> userInfo = new HashMap<>();
         String postURL = "https://kapi.kakao.com/v2/user/me";
+        System.out.println("로그인 정보 얻기");
 
         try {
             URL url = new URL(postURL);
@@ -152,7 +164,8 @@ public class LoginServiceImpl implements LoginService {
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode : " + responseCode);
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
+
             String line = "";
             StringBuilder result = new StringBuilder();
 
@@ -166,10 +179,10 @@ public class LoginServiceImpl implements LoginService {
             JsonObject kakaoAccount = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
 
             String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-            String email = kakaoAccount.getAsJsonObject().get("email").getAsString();
+//            String email = kakaoAccount.getAsJsonObject().get("email").getAsString();
 
             userInfo.put("nickname", nickname);
-            userInfo.put("email", email);
+//            userInfo.put("email", email);
 
         } catch (IOException exception) {
             exception.printStackTrace();
