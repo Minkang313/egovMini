@@ -14,6 +14,7 @@
 <div style="height: 30px"></div>
 
 <button onclick="sessoionLogout()">세션 로그아웃</button>
+<button onclick="cookieLogout()">쿠키 로그아웃</button>
 
 <div style="height: 30px"></div>
 
@@ -78,7 +79,7 @@
     }
 
     /**
-     * 세션 로그인
+     * 쿠키 로그인
      */
     const clickCookieLogin = () => {
         let username = document.getElementById('username').value
@@ -117,7 +118,7 @@
     const checkCookie = () => {
         let cookieArr = document.cookie.split(';')
 
-        for(let i = 0; i < cookieArr.length; i++){
+        for (let i = 0; i < cookieArr.length; i++) {
             let cookiePair = cookieArr[i].split('=') // 쿠키 이름과 값으로 분리
             if (cookiePair[0].trim() === 'loginId') {
                 alert('로그인 아이디: ' + cookiePair[1]);
@@ -125,6 +126,13 @@
                 alert('로그인 쿠키가 존재하지 않습니다.');
             }
         }
+    }
+
+    /**
+     * 쿠키 로그아웃
+     */
+    const cookieLogout = () => {
+        document.cookie = `loginId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
     }
 
     const kakaoLogin = () => {
